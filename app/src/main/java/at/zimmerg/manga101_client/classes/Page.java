@@ -1,7 +1,13 @@
 package at.zimmerg.manga101_client.classes;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.media.ImageReader;
+import android.os.Handler;
+import android.os.Looper;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.spi.CharsetProvider;
 
 public class Page {
@@ -39,4 +45,5 @@ public class Page {
     public void setImage(Image image) {
         this.image = image;
     }
+
 }

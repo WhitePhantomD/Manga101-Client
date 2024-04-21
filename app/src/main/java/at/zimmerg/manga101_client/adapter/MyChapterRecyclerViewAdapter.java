@@ -4,9 +4,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import at.zimmerg.manga101_client.fragments.placeholder.PlaceholderContent.PlaceholderItem;
+import at.zimmerg.manga101_client.classes.Page;
 import at.zimmerg.manga101_client.databinding.FragmentChapterImageBinding;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
@@ -16,9 +17,9 @@ import java.util.List;
 public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<MyChapterRecyclerViewAdapter.ViewHolder> {
 
     private MainViewModel mainViewModel;
-    private List<PlaceholderItem> mValues;
+    private List<Page> mValues;
 
-    public MyChapterRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyChapterRecyclerViewAdapter(List<Page> items) {
         mValues = items;
     }
 
@@ -32,8 +33,6 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<MyChapter
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-//        holder.mIdView.setText(mValues.get(position).id);
-//        holder.mContentView.setText(mValues.get(position).content);
     }
 
     @Override
@@ -45,24 +44,21 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<MyChapter
         this.mainViewModel = mainViewModel;
     }
 
-    public void updateList(List<PlaceholderItem> items) {
+    public void updateList(List<Page> items) {
         mValues = items;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public PlaceholderItem mItem;
+        public Page mItem;
+        public final ImageView mIdView;
+
 
         public ViewHolder(FragmentChapterImageBinding binding) {
             super(binding.getRoot());
-//            mIdView = binding.itemNumber;
-//            mContentView = binding.content;
+            mIdView = binding.imageView;
+
         }
 
-        @Override
-        public String toString() {
-//            return super.toString() + " '" + mContentView.getText() + "'";
-            return "";
-        }
     }
 }

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import at.zimmerg.manga101_client.adapter.MyChapterRecyclerViewAdapter;
 import at.zimmerg.manga101_client.databinding.FragmentChapterListBinding;
-import at.zimmerg.manga101_client.fragments.placeholder.PlaceholderContent;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
 
@@ -43,22 +42,21 @@ public class ChapterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentChapterListBinding.inflate(inflater, container, false);
-//        binding = FragmentChapterListBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         RecyclerView recyclerView = binding.chapterRecyclerviewList;
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        MyChapterRecyclerViewAdapter adapter = new MyChapterRecyclerViewAdapter(PlaceholderContent.ITEMS);
+        MyChapterRecyclerViewAdapter adapter = new MyChapterRecyclerViewAdapter(mainViewModel._pages.getValue());
         recyclerView.setAdapter(adapter);
 
-//        adapter.setMainViewModel(mainViewModel);
+        adapter.setMainViewModel(mainViewModel);
 
-//        mainViewModel._notes.observe(getViewLifecycleOwner(), notes -> {
-//            adapter.updateList(notes);
-//            adapter.notifyDataSetChanged();
-//        });
+        mainViewModel._pages.observe(getViewLifecycleOwner(), notes -> {
+            adapter.updateList(notes);
+            adapter.notifyDataSetChanged();
+        });
 
         return view;
     }

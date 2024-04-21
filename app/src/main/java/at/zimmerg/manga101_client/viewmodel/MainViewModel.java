@@ -1,11 +1,17 @@
 package at.zimmerg.manga101_client.viewmodel;
 
+import android.media.Image;
+
+import androidx.annotation.DrawableRes;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
+import at.zimmerg.manga101_client.R;
 import at.zimmerg.manga101_client.classes.Chapter;
+import at.zimmerg.manga101_client.classes.Page;
 
 public class MainViewModel extends ViewModel {
 
@@ -62,6 +68,26 @@ public class MainViewModel extends ViewModel {
 
     private ArrayList<Chapter> chapters = new ArrayList<>();
     public MutableLiveData<ArrayList<Chapter>> _chapters = new MutableLiveData<>(chapters);
+
+    private Chapter currentChapter;
+
+    public void setCurrentChapter(Chapter chapter) {
+        currentChapter = chapter;
+    }
+
+    public Chapter getCurrentChapter() {
+        return currentChapter;
+    }
+
+    private ArrayList<Page> pages = new ArrayList<>();
+    public MutableLiveData<ArrayList<Page>> _pages = new MutableLiveData<>(pages);
+
+    public void setPages(ArrayList<Page> pages) {
+        this.pages = pages;
+        _pages.setValue(pages);
+    }
+
+    
 
 
 }
