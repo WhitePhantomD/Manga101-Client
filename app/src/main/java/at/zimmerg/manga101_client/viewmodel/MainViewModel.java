@@ -3,6 +3,10 @@ package at.zimmerg.manga101_client.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
+import at.zimmerg.manga101_client.classes.Chapter;
+
 public class MainViewModel extends ViewModel {
 
     public static final int LOGIN = 0;
@@ -55,5 +59,9 @@ public class MainViewModel extends ViewModel {
     public void setToBack() {
         _state.setValue(BACK);
     }
+
+    private ArrayList<Chapter> chapters = new ArrayList<>();
+    public MutableLiveData<ArrayList<Chapter>> _chapters = new MutableLiveData<>(chapters);
+
 
 }
