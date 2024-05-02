@@ -1,19 +1,22 @@
 package at.zimmerg.manga101_client.classes;
 
-import android.media.Image;
-
 import java.util.List;
 
 public class Chapter {
 
+    private int id;
     private String title;
     private int chapterNumber;
     private List<Page> pages;
+    private int mangaId;
 
-    public Chapter(String title, int chapterNumber, List<Page> pages) {
+    public Chapter(int id,String title, int chapterNumber, List<Page> images,int mangaId) {
         this.title = title;
         this.chapterNumber = chapterNumber;
-        this.pages = pages;
+        this.pages = images;
+        this.id = id;
+        this.mangaId = mangaId;
+
     }
 
     public String getTitle() {
@@ -32,11 +35,27 @@ public class Chapter {
         this.chapterNumber = chapterNumber;
     }
 
-    public List<Page> getPages() {
-        return pages;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPages(List<Page> pages) {
         this.pages = pages;
+    }
+
+    public List<Page> getPages() {
+        return pages;
+    }
+
+    public int getMangaId() {
+        return mangaId;
+    }
+
+    public void setMangaId(int mangaId) {
+        this.mangaId = mangaId;
     }
 }

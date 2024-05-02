@@ -12,23 +12,16 @@ import java.nio.charset.spi.CharsetProvider;
 
 public class Page {
 
-    private Chapter chapter;
+    private int chapterId;
     private int pageNumber;
-    private Image image;
+    private String image;
 
-    public Page(Chapter chapter, int pageNumber, Image image) {
-        this.chapter = chapter;
+    public Page(int pageNumber, String image, int chapterId) {
         this.pageNumber = pageNumber;
         this.image = image;
+        this.chapterId = chapterId;
     }
 
-    public Chapter getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(Chapter chapter) {
-        this.chapter = chapter;
-    }
 
     public int getPageNumber() {
         return pageNumber;
@@ -38,12 +31,19 @@ public class Page {
         this.pageNumber = pageNumber;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
+    public int getChapterId() {
+        return chapterId;
+    }
+
+    public void setChapterId(int chapterId) {
+        this.chapterId = chapterId;
+    }
 }

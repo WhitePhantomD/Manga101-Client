@@ -45,6 +45,7 @@ public class ChapterFragment extends Fragment {
         View view = binding.getRoot();
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mainViewModel.setPages(mainViewModel.getCurrentChapter().getPages());
 
         RecyclerView recyclerView = binding.chapterRecyclerviewList;
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -53,11 +54,17 @@ public class ChapterFragment extends Fragment {
 
         adapter.setMainViewModel(mainViewModel);
 
-        mainViewModel._pages.observe(getViewLifecycleOwner(), notes -> {
-            adapter.updateList(notes);
+        mainViewModel._pages.observe(getViewLifecycleOwner(), pages -> {
+            adapter.updateList(pages);
             adapter.notifyDataSetChanged();
         });
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        binding = null;
     }
 }

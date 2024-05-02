@@ -9,6 +9,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import at.zimmerg.manga101_client.classes.Chapter;
+import at.zimmerg.manga101_client.classes.Page;
 import at.zimmerg.manga101_client.databinding.ActivityMainBinding;
 import at.zimmerg.manga101_client.fragments.ChapterFragment;
 import at.zimmerg.manga101_client.fragments.HomePlaceholderFragment;
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             if (state.equals(MainViewModel.LOGIN)) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), LoginFragment.newInstance())
+                        .addToBackStack(null)
                         .commit();
             } else if (state.equals(MainViewModel.HOME)) {
                 getSupportFragmentManager().beginTransaction()

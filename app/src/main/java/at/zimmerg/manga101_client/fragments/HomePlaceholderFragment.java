@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import at.zimmerg.manga101_client.databinding.FragmentHomePlaceholderBinding;
+import at.zimmerg.manga101_client.services.MangaService;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
 
@@ -46,6 +47,13 @@ public class HomePlaceholderFragment extends Fragment {
         View v = binding.getRoot();
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mainViewModel.getChapterById(1102, requireContext());
+        mainViewModel.mangaServiceChapterState.observe(getViewLifecycleOwner(), state -> {
+            if (state == MangaService.STATE_SUCCESS) {
+                mainViewModel.setCurrentChapter(mainViewModel.serviceChapter[0]);
+                binding.textView.setText(mainViewModel.getCurrentChapter().getTitle());
+            }
+        });
 
 //        binding.placeholderhomeClLayout.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
 

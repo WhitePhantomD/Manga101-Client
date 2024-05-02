@@ -40,7 +40,6 @@ public class MangaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMangaBinding.inflate(inflater, container, false);
-//        binding = FragmentMangaBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
