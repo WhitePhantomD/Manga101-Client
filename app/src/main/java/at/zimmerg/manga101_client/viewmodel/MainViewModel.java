@@ -29,7 +29,9 @@ public class MainViewModel extends ViewModel {
     public static final int OFFLINE = 7;
     public static final int BACK = 99;
 
-    public static final String SERVER_IP = "http://192.168.137.149:8080";
+//    public static final String SERVER_IP = "http://192.168.137.149:8080"; //Home Pc Hotspot
+    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Handy Hotspot
+//    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Laptop Hotspot
 
     private MutableLiveData<Integer> _state = new MutableLiveData<>(LOGIN);
     public MutableLiveData<Integer> state = _state;

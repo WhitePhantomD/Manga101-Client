@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import at.zimmerg.manga101_client.adapter.MyChapterRecyclerViewAdapter;
+import at.zimmerg.manga101_client.adapter.MyChapterTestRecyclerViewAdapter;
 import at.zimmerg.manga101_client.databinding.FragmentChapterListBinding;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
@@ -49,7 +50,10 @@ public class ChapterFragment extends Fragment {
 
         RecyclerView recyclerView = binding.chapterRecyclerviewList;
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        MyChapterRecyclerViewAdapter adapter = new MyChapterRecyclerViewAdapter(mainViewModel._pages.getValue());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+        linearLayoutManager.setInitialPrefetchItemCount(10);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        MyChapterTestRecyclerViewAdapter adapter = new MyChapterTestRecyclerViewAdapter(mainViewModel._pages.getValue());
         recyclerView.setAdapter(adapter);
 
         adapter.setMainViewModel(mainViewModel);

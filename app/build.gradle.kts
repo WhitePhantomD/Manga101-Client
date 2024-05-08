@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation(libs.recyclerview)
     implementation(libs.volley)
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation(libs.squareup.picasso)
     implementation(libs.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

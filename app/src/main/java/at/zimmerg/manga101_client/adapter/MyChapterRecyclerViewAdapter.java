@@ -59,13 +59,13 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             if (position == 0) {
                 navigationViewHolder.mButtonManga.setVisibility(View.GONE);
                 navigationViewHolder.mTextView.setVisibility(View.VISIBLE);
-                navigationViewHolder.mTextView.setText("Chapter: " + String.valueOf(mainViewModel.getCurrentChapter().getChapterNumber()));
+                navigationViewHolder.mTextView.setText("Chapter: " + mainViewModel.getCurrentChapter().getChapterNumber());
             } else {
                 navigationViewHolder.mTextView.setVisibility(View.GONE);
                 navigationViewHolder.mButtonManga.setVisibility(View.VISIBLE);
                 navigationViewHolder.mButtonManga.setOnClickListener(v -> mainViewModel.setToManga());
             }
-        } else {
+        } else if(getItemViewType(position) == TYPE_PAGE){
             PageViewHolder pageViewHolder = (PageViewHolder) holder;
             if (position -1 < mValues.size()){
                 pageViewHolder.mItem = mValues.get(position - 1);
