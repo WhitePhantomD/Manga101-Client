@@ -1,5 +1,9 @@
 package at.zimmerg.manga101_client.adapter;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -72,14 +77,52 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
                 Log.d("Chapter", "Image: " + pageViewHolder.mItem.getImage());
 
+                Target target = new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        int imageHeight = bitmap.getHeight();
+                        int imageWidth = bitmap.getWidth();
+                        DisplayMetrics displayMetrics = new DisplayMetrics();
+                        ((Activity) pageViewHolder.mImageView.getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                        int displayWidth = displayMetrics.widthPixels;
+                        int displayHeight = imageHeight * displayWidth / imageWidth;
+
+                        Log.d("Chapter", "ImageParams: H-" + imageHeight + " W-" + imageWidth);
+
+                        ViewGroup.LayoutParams params = pageViewHolder.mImageView.getLayoutParams();
+                        params.height = displayHeight;
+                        params.width = displayWidth;
+
+                        pageViewHolder.mImageView.setLayoutParams(params);
+
+                        pageViewHolder.mImageView.setImageBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        Log.d("Picasso", "Failed to load image");
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        // You can also show a placeholder while the image is loading
+                    }
+                };
+
+                Picasso.get().cancelRequest(pageViewHolder.mImageView);
 
                 Picasso.
                         get().
                         load(pageViewHolder.mItem.getImage()).
-                        error(R.drawable.ic_launcher_background).
-                        fit().
-                        centerCrop().
-                        into(pageViewHolder.mImageView);
+                        into(target);
+
+                pageViewHolder.mImageView.setOnClickListener(v -> {
+                    Picasso.
+                            get().
+                            load(pageViewHolder.mItem.getImage()).
+                            into(target);
+                });
+
             } else {
                 Log.e("Chapter", "To many images?" + (position - 1));
             }

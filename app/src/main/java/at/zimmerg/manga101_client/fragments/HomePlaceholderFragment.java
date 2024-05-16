@@ -51,10 +51,12 @@ public class HomePlaceholderFragment extends Fragment {
         View v = binding.getRoot();
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        mainViewModel.getChapterById(3580, requireContext());
-//        Picasso.get().load("https://imagizer.imageshack.com/v2/394x600q70/r/911/6skK16.jpg").into(binding.imageViewPh);
-//        Picasso.get().load("http://192.168.229.131:8080/images/eleceed_c001_c010~c001~081.jpg").into(binding.imageViewPh);
-//        Picasso.get().load("http://localhost:8080/images/eleceed_c001_c010~c001~103.jpg").into(binding.imageViewPh);
+//        mainViewModel.getChapterById(3502, requireContext());
+//        mainViewModel.getChapterById(3525, requireContext());
+        mainViewModel.getChapterById(3535, requireContext()); //problelm Kind
+//        mainViewModel.getChapterById(3545, requireContext());
+//        mainViewModel.getChapterById(3575, requireContext()); // problem Kind
+
         mainViewModel.mangaServiceChapterState.observe(getViewLifecycleOwner(), state -> {
             if (state == MangaService.STATE_SUCCESS) {
                 mainViewModel.setCurrentChapter(mainViewModel.serviceChapter[0]);

@@ -1,10 +1,15 @@
 package at.zimmerg.manga101_client.adapter;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.annotation.DrawableRes;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +54,17 @@ public class MyChapterTestRecyclerViewAdapter extends RecyclerView.Adapter<MyCha
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 int imageHeight = bitmap.getHeight();
                 int imageWidth = bitmap.getWidth();
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                ((Activity) holder.mImageView.getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int displayWidth = displayMetrics.widthPixels;
+                int displayHeight = imageHeight * displayWidth / imageWidth;
+
+                Log.d("Chapter", "ImageParams: H-" + imageHeight + " W-" + imageWidth);
 
                 ViewGroup.LayoutParams params = holder.mImageView.getLayoutParams();
-                params.height = imageHeight;
-                params.width = imageWidth;
-                
+                params.height = displayHeight;
+                params.width = displayWidth;
+
                 holder.mImageView.setLayoutParams(params);
 
                 holder.mImageView.setImageBitmap(bitmap);

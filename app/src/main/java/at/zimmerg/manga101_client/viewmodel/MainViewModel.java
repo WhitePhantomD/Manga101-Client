@@ -33,7 +33,7 @@ public class MainViewModel extends ViewModel {
     public static final String SERVER_IP = "http://192.168.229.131:8080"; //Handy Hotspot
 //    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Laptop Hotspot
 
-    private MutableLiveData<Integer> _state = new MutableLiveData<>(LOGIN);
+    private MutableLiveData<Integer> _state = new MutableLiveData<>(HOME);
     public MutableLiveData<Integer> state = _state;
 
     public void setToHome() {
