@@ -71,6 +71,8 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
                 pageViewHolder.mItem = mValues.get(position - 1);
 
                 Log.d("Chapter", "Image: " + pageViewHolder.mItem.getImage());
+
+
                 Picasso.
                         get().
                         load(pageViewHolder.mItem.getImage()).

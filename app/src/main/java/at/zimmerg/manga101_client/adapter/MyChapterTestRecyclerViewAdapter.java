@@ -1,7 +1,10 @@
 package at.zimmerg.manga101_client.adapter;
 
+import androidx.annotation.DrawableRes;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import at.zimmerg.manga101_client.R;
 import at.zimmerg.manga101_client.classes.Page;
@@ -40,15 +44,47 @@ public class MyChapterTestRecyclerViewAdapter extends RecyclerView.Adapter<MyCha
         holder.mItem = mValues.get(position);
         Log.d("Chapter", "ImageTest: " + holder.mItem.getImage());
 
+        Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                int imageHeight = bitmap.getHeight();
+                int imageWidth = bitmap.getWidth();
+
+                ViewGroup.LayoutParams params = holder.mImageView.getLayoutParams();
+                params.height = imageHeight;
+                params.width = imageWidth;
+                
+                holder.mImageView.setLayoutParams(params);
+
+                holder.mImageView.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                Log.d("Picasso", "Failed to load image");
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                // You can also show a placeholder while the image is loading
+            }
+        };
+
+        Picasso.get().cancelRequest(holder.mImageView);
+
         Picasso.
                 get().
                 load(holder.mItem.getImage()).
-                fit().
-//                resize(50,50).
-                centerCrop().
-                into(holder.mImageView);
-//        Picasso.get().load(holder.mItem.getImage()).into(holder.mImageView);
+                into(target);
+
+        holder.mImageView.setOnClickListener(v -> {
+            Picasso.
+                    get().
+                    load(holder.mItem.getImage()).
+                    into(target);
+        });
     }
+
 
     @Override
     public int getItemCount() {
