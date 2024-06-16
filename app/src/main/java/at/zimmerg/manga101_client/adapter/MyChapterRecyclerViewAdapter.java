@@ -67,12 +67,13 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             navigationViewHolder.mButtonPrevious.setOnClickListener(v ->{
                 mainViewModel.getChapterById(mainViewModel.getCurrentChapter().getPreviousChapterId(), holder.itemView.getContext());
             });
-            navigationViewHolder.mButtonManga.setOnClickListener(v -> {
+            navigationViewHolder.mTextView.setOnClickListener(v -> {
                 mainViewModel.getMangaChapterListById(mainViewModel.getCurrentChapter().getMangaId(), holder.itemView.getContext());
             });
             if (position == 0) {
                 navigationViewHolder.mButtonManga.setVisibility(View.GONE);
                 navigationViewHolder.mTextView.setVisibility(View.VISIBLE);
+                navigationViewHolder.mTextView.setClickable(true);
                 navigationViewHolder.mTextView.setText("Chapter: " + mainViewModel.getCurrentChapter().getChapterNumber());
                 if (mainViewModel.getCurrentChapter().getNextChapterId() == -1){
                     navigationViewHolder.mButtonNext.setVisibility(View.GONE);

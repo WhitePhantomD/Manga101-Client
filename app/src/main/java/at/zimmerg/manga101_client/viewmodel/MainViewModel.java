@@ -1,18 +1,14 @@
 package at.zimmerg.manga101_client.viewmodel;
 
 import android.content.Context;
-import android.media.Image;
 
-import androidx.annotation.DrawableRes;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
-import at.zimmerg.manga101_client.R;
 import at.zimmerg.manga101_client.classes.Chapter;
 import at.zimmerg.manga101_client.classes.Manga;
 import at.zimmerg.manga101_client.classes.Page;
@@ -124,6 +120,25 @@ public class MainViewModel extends ViewModel {
 
     public void getMangaChapterListById(int id, Context context) {
         mangaService.getMangaChapterListById(id, context);
+    }
+
+    private Manga currentManga;
+
+    public void setCurrentManga(Manga manga) {
+        currentManga = manga;
+    }
+
+    public Manga getCurrentManga() {
+        return currentManga;
+    }
+
+
+    public LiveData<Integer> mangaServiceMangaState = mangaService.mangaState;
+
+    public Manga[] serviceManga = mangaService.manga;
+
+    public void getMangaById(int id, Context context) {
+        mangaService.getMangaById(id, context);
     }
 
 }

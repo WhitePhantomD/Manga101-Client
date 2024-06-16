@@ -2,16 +2,13 @@ package at.zimmerg.manga101_client.fragments;
 
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import at.zimmerg.manga101_client.databinding.FragmentHomePlaceholderBinding;
@@ -71,6 +68,14 @@ public class HomePlaceholderFragment extends Fragment {
             }
         });
 
+        mainViewModel.getMangaById(2755, requireContext());
+        mainViewModel.mangaServiceMangaState.observe(getViewLifecycleOwner(), state -> {
+            if (state == MangaService.STATE_SUCCESS) {
+                mainViewModel.setCurrentManga(mainViewModel.serviceManga[0]);
+                binding.textView.setText(mainViewModel.getCurrentManga().getTitle());
+            }
+        });
+
         mainViewModel.getMangaChapterListById(2755, requireContext());
 
         mainViewModel.mangaScerviseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
@@ -88,7 +93,7 @@ public class HomePlaceholderFragment extends Fragment {
             mainViewModel.setToChapter();
         });
         binding.placeholderhomeBtnManga.setOnClickListener(x -> {
-            mainViewModel.setToChapterList();
+            mainViewModel.setToManga();
         });
 
         return v;

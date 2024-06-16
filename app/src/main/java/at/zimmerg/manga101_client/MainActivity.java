@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
                         .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), ChapterFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
+            } else if (state.equals(MainViewModel.MANGA)) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), MangaFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
     }

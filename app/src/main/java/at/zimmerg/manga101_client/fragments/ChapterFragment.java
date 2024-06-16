@@ -46,6 +46,7 @@ public class ChapterFragment extends Fragment {
         binding = FragmentChapterListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         mainViewModel.setPages(mainViewModel.getCurrentChapter().getPages());
 
