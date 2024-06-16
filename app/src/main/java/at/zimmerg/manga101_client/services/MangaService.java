@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.zimmerg.manga101_client.classes.Chapter;
+import at.zimmerg.manga101_client.classes.Manga;
 import at.zimmerg.manga101_client.classes.Page;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
@@ -72,12 +73,53 @@ public class MangaService {
                 _chapter.setValue(STATE_INVALID);
                 _chapter.setValue(STATE_INITIAL);
             }
+            Log.d("Chapter","State Success");
             _chapter.setValue(STATE_SUCCESS);
             _chapter.setValue(STATE_INITIAL);
         },volleyError -> {
             Log.e("Chapter","Error"+volleyError);
             _chapter.setValue(STATE_INVALID);
             _chapter.setValue(STATE_INITIAL);
+        });
+
+
+        requestQueue.add(request);
+
+    }
+    private final MutableLiveData<Integer> _mangaChapterList = new MutableLiveData<>(STATE_INITIAL);
+    public final LiveData<Integer> mangaChapterListState = _mangaChapterList;
+    public Manga[] mangaChapterList = new Manga[1];
+
+    public void getMangaChapterListById(int id, Context context) {
+
+        initQueue(context);
+        String url = SERVER_IP+"/manga/chapter/list/"+id;
+
+        JsonObjectRequest request = new JsonObjectRequest(url, jsonObject -> {
+            try {
+                Log.d("Chapter",jsonObject.toString());
+                int mangaId = jsonObject.getInt("mangaId");
+                String mangaName = jsonObject.getString("mangaName");
+                JSONArray chapters = jsonObject.getJSONArray("chapters");
+                ArrayList<Chapter> chapterArrayList = new ArrayList<>();
+                for (int i = 0; i < chapters.length(); i++) {
+                    Chapter newChapter = new Chapter(chapters.getJSONObject(i).getInt("id"));
+                    newChapter.setTitle(chapters.getJSONObject(i).getString("title"));
+                    newChapter.setChapterNumber(chapters.getJSONObject(i).getInt("chapterNumber"));
+                    chapterArrayList.add(newChapter);
+                }
+                mangaChapterList[0] = new Manga(mangaId,mangaName,chapterArrayList);
+            } catch (JSONException e) {
+                Log.e("Chapter","Parsing error"+ jsonObject);
+                _mangaChapterList.setValue(STATE_INVALID);
+                _mangaChapterList.setValue(STATE_INITIAL);
+            }
+            _mangaChapterList.setValue(STATE_SUCCESS);
+            _mangaChapterList.setValue(STATE_INITIAL);
+        },volleyError -> {
+            Log.e("Chapter","Error"+volleyError);
+            _mangaChapterList.setValue(STATE_INVALID);
+            _mangaChapterList.setValue(STATE_INITIAL);
         });
 
 

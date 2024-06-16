@@ -16,6 +16,7 @@ import at.zimmerg.manga101_client.classes.Chapter;
 import at.zimmerg.manga101_client.classes.Page;
 import at.zimmerg.manga101_client.databinding.ActivityMainBinding;
 import at.zimmerg.manga101_client.fragments.ChapterFragment;
+import at.zimmerg.manga101_client.fragments.ChapterListFragment;
 import at.zimmerg.manga101_client.fragments.HomePlaceholderFragment;
 import at.zimmerg.manga101_client.fragments.LoginFragment;
 import at.zimmerg.manga101_client.fragments.MangaFragment;
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), HomePlaceholderFragment.newInstance())
                         .commit();
-            } else if (state.equals(MainViewModel.MANGA)) {
+            } else if (state.equals(MainViewModel.CHAPTER_LIST)) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), MangaFragment.newInstance())
+                        .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), ChapterListFragment.newInstance(1))
                         .addToBackStack(null)
                         .commit();
             } else if (state.equals(MainViewModel.CHAPTER)) {

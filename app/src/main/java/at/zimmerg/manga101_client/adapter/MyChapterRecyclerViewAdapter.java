@@ -72,9 +72,12 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             }
         } else if(getItemViewType(position) == TYPE_PAGE){
             PageViewHolder pageViewHolder = (PageViewHolder) holder;
-            if (position -1 < mValues.size()){
-                pageViewHolder.mItem = mValues.get(position - 1);
-
+            if (position <= mValues.size()){
+                try{
+                pageViewHolder.mItem = mValues.get(position -1);
+                } catch (Exception e){
+                    Log.e("Chapter", "Error: " + e.getMessage());
+                }
                 Log.d("Chapter", "Image: " + pageViewHolder.mItem.getImage());
 
                 Target target = new Target() {
@@ -131,7 +134,7 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public int getItemCount() {
-        return mValues.size()+2;
+        return mValues.size()+1;
     }
 
     public void setMainViewModel(MainViewModel mainViewModel) {

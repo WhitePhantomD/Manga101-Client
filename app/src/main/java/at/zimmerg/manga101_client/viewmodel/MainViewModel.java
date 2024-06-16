@@ -14,6 +14,7 @@ import java.util.stream.IntStream;
 
 import at.zimmerg.manga101_client.R;
 import at.zimmerg.manga101_client.classes.Chapter;
+import at.zimmerg.manga101_client.classes.Manga;
 import at.zimmerg.manga101_client.classes.Page;
 import at.zimmerg.manga101_client.services.MangaService;
 
@@ -29,8 +30,8 @@ public class MainViewModel extends ViewModel {
     public static final int OFFLINE = 7;
     public static final int BACK = 99;
 
-//    public static final String SERVER_IP = "http://192.168.137.149:8080"; //Home Pc Hotspot
-    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Handy Hotspot
+    public static final String SERVER_IP = "http://192.168.137.131:8080"; //Home Pc Hotspot
+//    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Handy Hotspot
 //    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Laptop Hotspot
 
     private MutableLiveData<Integer> _state = new MutableLiveData<>(HOME);
@@ -72,9 +73,6 @@ public class MainViewModel extends ViewModel {
         _state.setValue(BACK);
     }
 
-    private ArrayList<Chapter> chapters = new ArrayList<>();
-    public MutableLiveData<ArrayList<Chapter>> _chapters = new MutableLiveData<>(chapters);
-
     private Chapter currentChapter;
 
     public void setCurrentChapter(Chapter chapter) {
@@ -103,6 +101,29 @@ public class MainViewModel extends ViewModel {
         mangaService.getChapterById(id, context);
     }
 
+    private Manga currentMangaChapterList;
 
+    public void setCurrentMangaChapterList(Manga manga) {
+        currentMangaChapterList = manga;
+    }
+
+    public Manga getCurrentMangaChapterList() {
+        return currentMangaChapterList;
+    }
+    private List<Chapter> chapters = new ArrayList<>();
+    public MutableLiveData<List<Chapter>> _chapters = new MutableLiveData<>(chapters);
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
+        _chapters.setValue(chapters);
+    }
+
+    public LiveData<Integer> mangaScerviseMangaChapterListState = mangaService.mangaChapterListState;
+
+    public Manga[] serviceMangaChapterList = mangaService.mangaChapterList;
+
+    public void getMangaChapterListById(int id, Context context) {
+        mangaService.getMangaChapterListById(id, context);
+    }
 
 }

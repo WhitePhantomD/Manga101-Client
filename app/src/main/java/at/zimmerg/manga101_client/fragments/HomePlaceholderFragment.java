@@ -53,21 +53,29 @@ public class HomePlaceholderFragment extends Fragment {
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 //        mainViewModel.getChapterById(3502, requireContext());
 //        mainViewModel.getChapterById(3525, requireContext());
-        mainViewModel.getChapterById(3535, requireContext()); //problelm Kind
-//        mainViewModel.getChapterById(3545, requireContext());
-//        mainViewModel.getChapterById(3575, requireContext()); // problem Kind
+//        mainViewModel.getChapterById(3535, requireContext());
+        mainViewModel.getChapterById(3545, requireContext());
+//        mainViewModel.getChapterById(3575, requireContext());
+
+        Picasso.
+                get().
+                load("http://192.168.137.131:8080/images/eleceed_c001_c010~c001~081.jpg").
+                fit().
+                centerCrop().
+                into(binding.imageViewPh);
 
         mainViewModel.mangaServiceChapterState.observe(getViewLifecycleOwner(), state -> {
             if (state == MangaService.STATE_SUCCESS) {
                 mainViewModel.setCurrentChapter(mainViewModel.serviceChapter[0]);
                 binding.textView.setText(mainViewModel.getCurrentChapter().getTitle());
+            }
+        });
 
-                Picasso.
-                        get().
-                        load("http://192.168.229.131:8080/images/eleceed_c001_c010~c001~081.jpg").
-                        fit().
-                        centerCrop().
-                        into(binding.imageViewPh);
+        mainViewModel.getMangaChapterListById(2755, requireContext());
+
+        mainViewModel.mangaScerviseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
+            if (state == MangaService.STATE_SUCCESS) {
+                mainViewModel.setCurrentMangaChapterList(mainViewModel.serviceMangaChapterList[0]);
             }
         });
 
@@ -80,7 +88,7 @@ public class HomePlaceholderFragment extends Fragment {
             mainViewModel.setToChapter();
         });
         binding.placeholderhomeBtnManga.setOnClickListener(x -> {
-            mainViewModel.setToManga();
+            mainViewModel.setToChapterList();
         });
 
         return v;

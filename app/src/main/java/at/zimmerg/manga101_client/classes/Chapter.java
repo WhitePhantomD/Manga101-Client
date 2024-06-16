@@ -10,13 +10,15 @@ public class Chapter {
     private List<Page> pages;
     private int mangaId;
 
+    public Chapter(int id) {
+        this.id = id;
+    }
     public Chapter(int id,String title, int chapterNumber, List<Page> images,int mangaId) {
         this.title = title;
         this.chapterNumber = chapterNumber;
         this.pages = images;
         this.id = id;
         this.mangaId = mangaId;
-
     }
 
     public String getTitle() {

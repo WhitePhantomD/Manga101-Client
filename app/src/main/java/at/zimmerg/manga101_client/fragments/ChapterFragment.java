@@ -53,7 +53,7 @@ public class ChapterFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         linearLayoutManager.setInitialPrefetchItemCount(3);
         recyclerView.setLayoutManager(linearLayoutManager);
-        MyChapterTestRecyclerViewAdapter adapter = new MyChapterTestRecyclerViewAdapter(mainViewModel._pages.getValue());
+        MyChapterRecyclerViewAdapter adapter = new MyChapterRecyclerViewAdapter(mainViewModel._pages.getValue());
         recyclerView.setAdapter(adapter);
 
         adapter.setMainViewModel(mainViewModel);
