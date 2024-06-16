@@ -9,16 +9,21 @@ public class Chapter {
     private int chapterNumber;
     private List<Page> pages;
     private int mangaId;
+    private int nextChapterId;
+    private int previousChapterId;
 
     public Chapter(int id) {
         this.id = id;
     }
-    public Chapter(int id,String title, int chapterNumber, List<Page> images,int mangaId) {
+
+    public Chapter(int id, String title, int chapterNumber, List<Page> pages, int mangaId, int nextChapterId, int previousChapterId) {
+        this.id = id;
         this.title = title;
         this.chapterNumber = chapterNumber;
-        this.pages = images;
-        this.id = id;
+        this.pages = pages;
         this.mangaId = mangaId;
+        this.nextChapterId = nextChapterId;
+        this.previousChapterId = previousChapterId;
     }
 
     public String getTitle() {
@@ -59,5 +64,21 @@ public class Chapter {
 
     public void setMangaId(int mangaId) {
         this.mangaId = mangaId;
+    }
+
+    public int getNextChapterId() {
+        return nextChapterId;
+    }
+
+    public void setNextChapterId(int nextChapterId) {
+        this.nextChapterId = nextChapterId;
+    }
+
+    public int getPreviousChapterId() {
+        return previousChapterId;
+    }
+
+    public void setPreviousChapterId(int previousChapterId) {
+        this.previousChapterId = previousChapterId;
     }
 }

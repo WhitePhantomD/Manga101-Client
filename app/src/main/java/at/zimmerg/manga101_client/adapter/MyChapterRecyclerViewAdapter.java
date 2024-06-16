@@ -20,10 +20,10 @@ import com.squareup.picasso.Target;
 
 import java.util.List;
 
-import at.zimmerg.manga101_client.R;
 import at.zimmerg.manga101_client.classes.Page;
 import at.zimmerg.manga101_client.databinding.FragmentChapterImageBinding;
 import at.zimmerg.manga101_client.databinding.FragmentChapterNavigationBinding;
+import at.zimmerg.manga101_client.services.MangaService;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
 
@@ -41,7 +41,7 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0 || position == mValues.size()) {
+        if (position == 0 || position == mValues.size() +1) {
             return TYPE_NAVIGATION;
         } else {
             return TYPE_PAGE;
@@ -61,20 +61,51 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_NAVIGATION) {
             NavigationViewHolder navigationViewHolder = (NavigationViewHolder) holder;
+            navigationViewHolder.mButtonNext.setOnClickListener(v ->{
+                mainViewModel.getChapterById(mainViewModel.getCurrentChapter().getNextChapterId(), holder.itemView.getContext());
+            });
+            navigationViewHolder.mButtonPrevious.setOnClickListener(v ->{
+                mainViewModel.getChapterById(mainViewModel.getCurrentChapter().getPreviousChapterId(), holder.itemView.getContext());
+            });
+            navigationViewHolder.mButtonManga.setOnClickListener(v -> {
+                mainViewModel.getMangaChapterListById(mainViewModel.getCurrentChapter().getMangaId(), holder.itemView.getContext());
+            });
             if (position == 0) {
                 navigationViewHolder.mButtonManga.setVisibility(View.GONE);
                 navigationViewHolder.mTextView.setVisibility(View.VISIBLE);
                 navigationViewHolder.mTextView.setText("Chapter: " + mainViewModel.getCurrentChapter().getChapterNumber());
+                if (mainViewModel.getCurrentChapter().getNextChapterId() == -1){
+                    navigationViewHolder.mButtonNext.setVisibility(View.GONE);
+                } else {
+                    navigationViewHolder.mButtonNext.setVisibility(View.VISIBLE);
+                }
+
+                if (mainViewModel.getCurrentChapter().getPreviousChapterId() == -1){
+                    navigationViewHolder.mButtonPrevious.setVisibility(View.GONE);
+                } else {
+                    navigationViewHolder.mButtonPrevious.setVisibility(View.VISIBLE);
+                }
+
             } else {
                 navigationViewHolder.mTextView.setVisibility(View.GONE);
                 navigationViewHolder.mButtonManga.setVisibility(View.VISIBLE);
-                navigationViewHolder.mButtonManga.setOnClickListener(v -> mainViewModel.setToManga());
+                if (mainViewModel.getCurrentChapter().getNextChapterId() == -1){
+                    navigationViewHolder.mButtonNext.setVisibility(View.GONE);
+                } else {
+                    navigationViewHolder.mButtonNext.setVisibility(View.VISIBLE);
+                }
+
+                if (mainViewModel.getCurrentChapter().getPreviousChapterId() == -1){
+                    navigationViewHolder.mButtonPrevious.setVisibility(View.GONE);
+                } else {
+                    navigationViewHolder.mButtonPrevious.setVisibility(View.VISIBLE);
+                }
             }
         } else if(getItemViewType(position) == TYPE_PAGE){
             PageViewHolder pageViewHolder = (PageViewHolder) holder;
             if (position <= mValues.size()){
                 try{
-                pageViewHolder.mItem = mValues.get(position -1);
+                pageViewHolder.mItem = mValues.get(position - 1);
                 } catch (Exception e){
                     Log.e("Chapter", "Error: " + e.getMessage());
                 }
@@ -134,7 +165,7 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public int getItemCount() {
-        return mValues.size()+1;
+        return mValues.size()+2;
     }
 
     public void setMainViewModel(MainViewModel mainViewModel) {
@@ -161,14 +192,14 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
         public final TextView mTextView;
         public final Button mButtonManga;
-        public final Button mButtonBefore;
+        public final Button mButtonPrevious;
         public final Button mButtonNext;
 
         public NavigationViewHolder(FragmentChapterNavigationBinding binding) {
             super(binding.getRoot());
             mTextView = binding.chapterTextviewInfo;
             mButtonManga = binding.chapterButtonManga;
-            mButtonBefore = binding.chapterButtonBefore;
+            mButtonPrevious = binding.chapterButtonPrevious;
             mButtonNext = binding.chapterButtonNext;
 
         }

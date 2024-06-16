@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import at.zimmerg.manga101_client.adapter.MyChapterRecyclerViewAdapter;
 import at.zimmerg.manga101_client.adapter.MyChapterTestRecyclerViewAdapter;
 import at.zimmerg.manga101_client.databinding.FragmentChapterListBinding;
+import at.zimmerg.manga101_client.services.MangaService;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
 
@@ -58,13 +59,36 @@ public class ChapterFragment extends Fragment {
 
         adapter.setMainViewModel(mainViewModel);
 
+        mainViewModel.mangaServiceChapterState.observe(getViewLifecycleOwner(), state -> {
+            if (state == MangaService.STATE_SUCCESS) {
+                mainViewModel.setCurrentChapter(mainViewModel.serviceChapter[0]);
+                mainViewModel.setPages(mainViewModel.getCurrentChapter().getPages());
+            }
+        });
+
         mainViewModel._pages.observe(getViewLifecycleOwner(), pages -> {
             adapter.updateList(pages);
             adapter.notifyDataSetChanged();
+            linearLayoutManager.scrollToPosition(0);
+        });
+
+        mainViewModel.mangaScerviseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
+            if (state == MangaService.STATE_SUCCESS) {
+                mainViewModel.setCurrentMangaChapterList(mainViewModel.serviceMangaChapterList[0]);
+                mainViewModel.setToChapterList();
+            }
         });
 
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
 
     @Override
     public void onDestroyView(){
