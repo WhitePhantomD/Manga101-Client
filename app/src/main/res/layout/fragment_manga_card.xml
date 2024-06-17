@@ -18,15 +18,14 @@
 
         <ImageView
             android:id="@+id/card_cover_iv"
-            android:layout_width="177dp"
-            android:layout_height="190dp"
+            android:layout_width="128dp"
+            android:layout_height="180dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/card_title_tv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/one" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/card_title_tv"

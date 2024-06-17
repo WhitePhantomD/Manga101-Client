@@ -95,6 +95,7 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             } else {
                 navigationViewHolder.mTextView.setVisibility(View.GONE);
                 navigationViewHolder.mButtonManga.setVisibility(View.VISIBLE);
+                navigationViewHolder.mButtonManga.setText("Manga");
                 if (mainViewModel.getCurrentChapter().getNextChapterId() == -1){
                     navigationViewHolder.mButtonNext.setVisibility(View.GONE);
                 } else {

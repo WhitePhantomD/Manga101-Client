@@ -40,7 +40,8 @@ public class MySearchListRecyclerViewAdapter extends RecyclerView.Adapter<MySear
         holder.mTitle.setText(holder.mItem.getTitle());
         Picasso.
                 get().
-                load(holder.mItem.getCoverImage()).
+                load(mainViewModel.SERVER_IP+holder.mItem.getCoverImage()).
+                fit().
                 into(holder.mImageView);
         holder.mGenre.setText(holder.mItem.getGenres().toString());
         holder.mStatus.setText(holder.mItem.getStatus());
