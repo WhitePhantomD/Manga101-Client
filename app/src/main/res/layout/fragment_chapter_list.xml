@@ -6,6 +6,7 @@
     android:name="at.zimmerg.manga101_client.fragments.ChapterFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/oxfordblue"
     app:layoutManager="LinearLayoutManager"
     tools:context=".fragments.ChapterFragment"
     tools:listitem="@layout/fragment_chapter_image" />

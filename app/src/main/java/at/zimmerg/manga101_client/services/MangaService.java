@@ -163,7 +163,7 @@ public class MangaService {
 
     private final MutableLiveData<Integer> _searchManga = new MutableLiveData<>(STATE_INITIAL);
     public final LiveData<Integer> searchMangaState = _searchManga;
-    public List<Manga> searchManga;
+    public List<Manga> searchManga = new ArrayList<>();
 
     public void getMangaBySubstr(String substr, Context context) {
         initQueue(context);
@@ -196,7 +196,7 @@ public class MangaService {
 
     private final MutableLiveData<Integer> _allManga = new MutableLiveData<>(STATE_INITIAL);
     public final LiveData<Integer> allMangaState = _allManga;
-    public List<Manga> allManga;
+    public List<Manga> allManga = new ArrayList<>();
 
     public void getAllManga(Context context) {
         initQueue(context);
@@ -208,7 +208,8 @@ public class MangaService {
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Manga>>(){}.getType();
                         List<Manga> mangaList = gson.fromJson(response, listType);
-                        allManga = mangaList;
+                        allManga.clear();
+                        allManga.addAll(mangaList);
                         _allManga.setValue(STATE_SUCCESS);
                         _allManga.setValue(STATE_INITIAL);
                     } catch (JsonSyntaxException e) {

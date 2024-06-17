@@ -15,6 +15,8 @@ public class Manga {
     private ArrayList<String> genres;
     private int chapterCount;
 
+    public Manga() {
+    }
 
     public Manga(int id) {
         this.id = id;
@@ -108,4 +110,5 @@ public class Manga {
     public void setChapterCount(int chapterCount) {
         this.chapterCount = chapterCount;
     }
+
 }

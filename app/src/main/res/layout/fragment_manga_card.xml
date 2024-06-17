@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/delif_blue"
     app:cardCornerRadius="20dp"
     app:cardElevation="10dp"
     app:cardMaxElevation="12dp"
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="TextView"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.66"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Genre:"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/card_title_tv"
             app:layout_constraintTop_toBottomOf="@+id/card_title_tv" />
 
@@ -53,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="TextView"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/card_genre_tv"
             app:layout_constraintTop_toBottomOf="@+id/card_genre_tv" />
 
@@ -62,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="TextView"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/genre_tv"
             app:layout_constraintTop_toBottomOf="@+id/genre_tv" />
 
@@ -71,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="TextView"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/card_status_tv"
             app:layout_constraintTop_toBottomOf="@+id/card_status_tv" />
     </androidx.constraintlayout.widget.ConstraintLayout>

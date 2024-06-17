@@ -21,14 +21,14 @@ public class MainViewModel extends ViewModel {
     public static final int MANGA = 2;
     public static final int CHAPTER = 3;
     public static final int SEARCH = 4;
-    public static final int SETTINGS = 5;
+    public static final int PLACEHOLDER = 5;
     public static final int CHAPTER_LIST = 6;
     public static final int OFFLINE = 7;
     public static final int BACK = 99;
 
-    public static final String SERVER_IP = "http://192.168.137.131:8080"; //Home Pc Hotspot
-//    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Handy Hotspot
-//    public static final String SERVER_IP = "http://192.168.229.131:8080"; //Laptop Hotspot
+//    public static final String SERVER_IP = "http://192.168.137.131:8080"; //Home Pc Hotspot
+    public static final String SERVER_IP = "http://192.168.235.131:8080"; //Handy Hotspot
+
 
     private MutableLiveData<Integer> _state = new MutableLiveData<>(HOME);
     public MutableLiveData<Integer> state = _state;
@@ -50,7 +50,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public void setToSettings() {
-        _state.setValue(SETTINGS);
+        _state.setValue(PLACEHOLDER);
     }
 
     public void setToChapterList() {

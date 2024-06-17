@@ -51,7 +51,7 @@ public class MangaFragment extends Fragment {
         View v = binding.getRoot();
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        mainViewModel.setChapters(mainViewModel.getCurrentMangaChapterList().getChapters());
+
 
         Manga manga = mainViewModel.getCurrentManga();
         Context context = v.getContext();
@@ -85,13 +85,16 @@ public class MangaFragment extends Fragment {
             if (state == MangaService.STATE_SUCCESS) {
                 mainViewModel.setCurrentMangaChapterList(mainViewModel.serviceMangaChapterList[0]);
                 mainViewModel.getCurrentManga().setChapterCount(mainViewModel.getCurrentMangaChapterList().getChapters().size());
+                mainViewModel.setChapters(mainViewModel.getCurrentMangaChapterList().getChapters());
                 binding.chaptercountTv.setText(String.valueOf(mainViewModel.getCurrentManga().getChapterCount()));
             }
         });
 
+        String path = mainViewModel.SERVER_IP+ manga.getCoverImage();
+
         Picasso.
                 get().
-                load(manga.getCoverImage()).
+                load(path).
                 into(binding.imageView3);
 
         binding.mangaTitleTv.setText(manga.getTitle());

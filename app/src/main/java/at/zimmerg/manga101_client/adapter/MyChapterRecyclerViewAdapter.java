@@ -61,6 +61,11 @@ public class MyChapterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_NAVIGATION) {
             NavigationViewHolder navigationViewHolder = (NavigationViewHolder) holder;
+            navigationViewHolder.mButtonManga.setOnClickListener(v ->{
+                mainViewModel.getMangaById(mainViewModel.getCurrentChapter().getMangaId(),holder.itemView.getContext());
+                mainViewModel.setCurrentManga(mainViewModel.serviceManga[0]);
+                mainViewModel.setToManga();
+            });
             navigationViewHolder.mButtonNext.setOnClickListener(v ->{
                 mainViewModel.getChapterById(mainViewModel.getCurrentChapter().getNextChapterId(), holder.itemView.getContext());
             });

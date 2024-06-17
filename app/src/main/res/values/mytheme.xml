@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MyManga101Client" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/oxfordblue</item>
+        <item name="colorPrimaryVariant">@color/delif_blue</item>
+        <item name="colorSecondary">@color/silver</item>
+        <item name="colorAccent">@color/icterine</item>
+
+    </style>
+</resources>

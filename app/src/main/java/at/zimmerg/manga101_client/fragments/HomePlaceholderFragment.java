@@ -69,6 +69,13 @@ public class HomePlaceholderFragment extends Fragment {
             }
         });
 
+        mainViewModel.getAllManga(requireContext());
+        mainViewModel.mangaServiseAllMangaState.observe(getViewLifecycleOwner(), state -> {
+            if (state == MangaService.STATE_SUCCESS) {
+                mainViewModel.setCurrentAllManga(mainViewModel.serviceMangaAll);
+            }
+        });
+
         mainViewModel.getMangaById(2755, requireContext());
         mainViewModel.mangaServiceMangaState.observe(getViewLifecycleOwner(), state -> {
             if (state == MangaService.STATE_SUCCESS) {
@@ -106,7 +113,7 @@ public class HomePlaceholderFragment extends Fragment {
 //        binding.placeholderhomeClLayout.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
 
         binding.placeholderhomeBtnLogin.setOnClickListener(x -> {
-            mainViewModel.setToLogin();
+            mainViewModel.setToHome();
         });
         binding.placeholderhomeBtnChapter.setOnClickListener(x -> {
             mainViewModel.setToChapter();

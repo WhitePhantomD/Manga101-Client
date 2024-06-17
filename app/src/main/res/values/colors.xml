@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="oxfordblue">#102542</color>
+    <color name="delif_blue">#142e52</color>
+    <color name="silver">#c9c9c9</color>
+    <color name="icterine">#fcfc62</color>
 </resources>
