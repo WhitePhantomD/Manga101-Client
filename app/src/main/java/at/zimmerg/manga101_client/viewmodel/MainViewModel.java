@@ -20,7 +20,7 @@ public class MainViewModel extends ViewModel {
     public static final int HOME = 1;
     public static final int MANGA = 2;
     public static final int CHAPTER = 3;
-    public static final int LIKED_CHAPTER = 4;
+    public static final int SEARCH = 4;
     public static final int SETTINGS = 5;
     public static final int CHAPTER_LIST = 6;
     public static final int OFFLINE = 7;
@@ -45,8 +45,8 @@ public class MainViewModel extends ViewModel {
         _state.setValue(CHAPTER);
     }
 
-    public void setToLikedChapter() {
-        _state.setValue(LIKED_CHAPTER);
+    public void setToSearch() {
+        _state.setValue(SEARCH);
     }
 
     public void setToSettings() {
@@ -114,7 +114,7 @@ public class MainViewModel extends ViewModel {
         _chapters.setValue(chapters);
     }
 
-    public LiveData<Integer> mangaScerviseMangaChapterListState = mangaService.mangaChapterListState;
+    public LiveData<Integer> mangaServiseMangaChapterListState = mangaService.mangaChapterListState;
 
     public Manga[] serviceMangaChapterList = mangaService.mangaChapterList;
 
@@ -141,4 +141,40 @@ public class MainViewModel extends ViewModel {
         mangaService.getMangaById(id, context);
     }
 
+
+    private List<Manga> searchedManga = new ArrayList<>();
+    public MutableLiveData<List<Manga>> _searchedManga = new MutableLiveData<>(searchedManga);
+
+    public void setSearchedManga(List<Manga> mangas) {
+        this.searchedManga = mangas;
+        _searchedManga.setValue(mangas);
+    }
+
+    public LiveData<Integer> mangaServiceSearchState = mangaService.searchMangaState;
+    public List<Manga> searchManga = mangaService.searchManga;
+    public void getSearchedManga(String query, Context context) {
+        mangaService.getMangaBySubstr(query, context);
+    }
+
+
+    private List<Manga> currentAllManga = new ArrayList<>();
+    public MutableLiveData<List<Manga>> _allManga = new MutableLiveData<>(currentAllManga);
+
+    public void setCurrentAllManga(List<Manga> manga) {
+        currentAllManga = manga;
+        _allManga.setValue(manga);
+    }
+
+    public List<Manga> getCurrentAllManga() {
+        return currentAllManga;
+    }
+
+
+    public LiveData<Integer> mangaServiseAllMangaState = mangaService.allMangaState;
+
+    public List<Manga> serviceMangaAll = mangaService.allManga;
+
+    public void getAllManga(Context context) {
+        mangaService.getAllManga(context);
+    }
 }

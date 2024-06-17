@@ -161,6 +161,72 @@ public class MangaService {
         requestQueue.add(request);
     }
 
+    private final MutableLiveData<Integer> _searchManga = new MutableLiveData<>(STATE_INITIAL);
+    public final LiveData<Integer> searchMangaState = _searchManga;
+    public List<Manga> searchManga;
+
+    public void getMangaBySubstr(String substr, Context context) {
+        initQueue(context);
+        String url = SERVER_IP + "/manga/manga/" + substr;
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Manga>>(){}.getType();
+                        List<Manga> mangaList = gson.fromJson(response, listType);
+                        searchManga = mangaList;
+                        _searchManga.setValue(STATE_SUCCESS);
+                        _searchManga.setValue(STATE_INITIAL);
+                    } catch (JsonSyntaxException e) {
+                        Log.e("Manga","Parsing error", e);
+                        _searchManga.setValue(STATE_INVALID);
+                        _searchManga.setValue(STATE_INITIAL);
+                    }
+                },
+                error -> {
+                    Log.e("Manga","Error", error);
+                    _searchManga.setValue(STATE_INVALID);
+                    _searchManga.setValue(STATE_INITIAL);
+                }
+        );
+
+        requestQueue.add(request);
+    }
+
+    private final MutableLiveData<Integer> _allManga = new MutableLiveData<>(STATE_INITIAL);
+    public final LiveData<Integer> allMangaState = _allManga;
+    public List<Manga> allManga;
+
+    public void getAllManga(Context context) {
+        initQueue(context);
+        String url = SERVER_IP + "/manga/manga/all";
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Manga>>(){}.getType();
+                        List<Manga> mangaList = gson.fromJson(response, listType);
+                        allManga = mangaList;
+                        _allManga.setValue(STATE_SUCCESS);
+                        _allManga.setValue(STATE_INITIAL);
+                    } catch (JsonSyntaxException e) {
+                        Log.e("Manga","Parsing error", e);
+                        _allManga.setValue(STATE_INVALID);
+                        _allManga.setValue(STATE_INITIAL);
+                    }
+                },
+                error -> {
+                    Log.e("Manga","Error", error);
+                    _allManga.setValue(STATE_INVALID);
+                    _allManga.setValue(STATE_INITIAL);
+                }
+        );
+
+        requestQueue.add(request);
+    }
+
     private void initQueue(Context context) {
         if (requestQueue == null){
             requestQueue = Volley.newRequestQueue(context);

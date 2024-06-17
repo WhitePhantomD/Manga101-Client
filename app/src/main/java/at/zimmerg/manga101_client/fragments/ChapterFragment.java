@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import at.zimmerg.manga101_client.adapter.MyChapterRecyclerViewAdapter;
-import at.zimmerg.manga101_client.adapter.MyChapterTestRecyclerViewAdapter;
 import at.zimmerg.manga101_client.databinding.FragmentChapterListBinding;
 import at.zimmerg.manga101_client.services.MangaService;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
@@ -73,7 +72,7 @@ public class ChapterFragment extends Fragment {
             linearLayoutManager.scrollToPosition(0);
         });
 
-        mainViewModel.mangaScerviseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
+        mainViewModel.mangaServiseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
             if (state == MangaService.STATE_SUCCESS) {
                 mainViewModel.setCurrentMangaChapterList(mainViewModel.serviceMangaChapterList[0]);
                 mainViewModel.setToChapterList();

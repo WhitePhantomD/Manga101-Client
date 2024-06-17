@@ -20,6 +20,7 @@ import at.zimmerg.manga101_client.fragments.ChapterListFragment;
 import at.zimmerg.manga101_client.fragments.HomePlaceholderFragment;
 import at.zimmerg.manga101_client.fragments.LoginFragment;
 import at.zimmerg.manga101_client.fragments.MangaFragment;
+import at.zimmerg.manga101_client.fragments.SearchFragment;
 import at.zimmerg.manga101_client.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
                         .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), MangaFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
-
+            } else if (state.equals(MainViewModel.SEARCH)) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(binding.mainConstraintlayoutFragmentcontainer.getId(), SearchFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

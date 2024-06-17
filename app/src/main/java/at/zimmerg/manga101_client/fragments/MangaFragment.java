@@ -1,9 +1,6 @@
 package at.zimmerg.manga101_client.fragments;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,14 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import at.zimmerg.manga101_client.adapter.MyChapterListRecyclerViewAdapter;
 import at.zimmerg.manga101_client.classes.Manga;
@@ -87,7 +81,7 @@ public class MangaFragment extends Fragment {
 
         mainViewModel.getMangaChapterListById(manga.getId(), requireContext());
 
-        mainViewModel.mangaScerviseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
+        mainViewModel.mangaServiseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
             if (state == MangaService.STATE_SUCCESS) {
                 mainViewModel.setCurrentMangaChapterList(mainViewModel.serviceMangaChapterList[0]);
                 mainViewModel.getCurrentManga().setChapterCount(mainViewModel.getCurrentMangaChapterList().getChapters().size());

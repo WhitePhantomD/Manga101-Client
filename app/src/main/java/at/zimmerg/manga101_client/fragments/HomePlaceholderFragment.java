@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.squareup.picasso.Picasso;
 
@@ -78,9 +79,27 @@ public class HomePlaceholderFragment extends Fragment {
 
         mainViewModel.getMangaChapterListById(2755, requireContext());
 
-        mainViewModel.mangaScerviseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
+        mainViewModel.mangaServiseMangaChapterListState.observe(getViewLifecycleOwner(), state -> {
             if (state == MangaService.STATE_SUCCESS) {
                 mainViewModel.setCurrentMangaChapterList(mainViewModel.serviceMangaChapterList[0]);
+            }
+        });
+
+        SearchView searchView = binding.placeholderSearchview;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SearchFragment searchFragment = new SearchFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("query", query);
+                searchFragment.setArguments(bundle);
+                mainViewModel.setToSearch();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 
